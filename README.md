@@ -1,2 +1,7 @@
-# py_useful-functions
-All functions that I developed in Python and may be useful on many different cases.
+# Python useful scripts
+
+## en-us
+Python scripts that may be useful on some cases.
+
+## pt-br
+Scripts feitos em Python que podem ser úteis.
