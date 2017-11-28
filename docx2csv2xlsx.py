@@ -12,9 +12,9 @@ para excel.
 import docx
 import csv
 from xlsxwriter.workbook import Workbook
+import docx2txt
 
-# just change the name emails.csv, if you 
-# want a different name.
+# docx para csv
 def docx2csv(filename):
     # docx to list
     doc = docx.Document(filename)
@@ -26,21 +26,15 @@ def docx2csv(filename):
     for item in fulltext:
         f.write(item + '\n')
     f.close()
-
-# if you need clean or process the csv of any way,
-# do it here.    
-def processarCsv(filename):
-    with open(filename) as fvelho:
-        with open('emailsfinal.csv', 'w') as fnovo:
-            for line in fvelho:
-                linha = line.replace(' | ', ',')
-                linha = linha.replace('.COM ', '.COM\n')
-                linha = linha.replace('.BR ', '.BR\n')
-                fnovo.write(linha)
-    fvelho.close()
-    fnovo.close()
     
-# csv to xlsx. Don't need to change anything.
+# docx para txt
+def doc2txt(filename):
+    text = docx2txt.process(filename)
+    f = open('novo.txt', 'w')
+    f.write(text)
+    f.close()
+
+# csv para xlsx
 def csv2xlsx(csvfile):
     workbook = Workbook(csvfile + '.xlsx')
     worksheet = workbook.add_worksheet()
@@ -50,9 +44,25 @@ def csv2xlsx(csvfile):
             for c, col in enumerate(row):
                 worksheet.write(r, c, col)
     workbook.close()
+
+# if you need clean or process the csv of any way,
+# do it here.    
+def processar(filename):
+    with open(filename) as fvelho:
+        with open('emailsfinal.csv', 'w') as fnovo:
+            for line in fvelho:
+                lista = line.split()
+                if len(lista)>1:
+                    email = lista[len(lista)-1]
+                    lista = lista[:-1]
+                    nome = " ".join(lista)
+                    fnovo.write(nome + ',' + email + '\n')
+    fvelho.close()
+    fnovo.close()
     
 # ------------------------------------------------------------
 if __name__ == '__main__':
-    docx2csv('FAZENDO.docx') # name of the docx
-    processarCsv('emails.csv') # name of the first csv file
+    doc2txt('MaisSNO.docx')
+    #docx2csv('MaisSNO.docx') # name of the docx
+    processar('novo.txt')
     csv2xlsx('emailsfinal.csv') # name of the processed csv
