@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Oct 28 11:43:21 2017
-Cliente: Luis Gustavo
-Criado para converter word docx emails e nomes
-para excel. 
 
 @author: Rômulo Ponciano 
-@email: romuloponciano@id.uff.br
+@email: github.com/rponciano
 """
 
 import docx
