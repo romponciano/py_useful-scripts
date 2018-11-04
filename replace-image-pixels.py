@@ -15,7 +15,7 @@ pixels = list(im.getdata())
 idx = 0
 for i in pixels:
 	if i == rgb:
-		pixels[idx] = (255,255,255)
+		pixels[idx] = finalColor
 	idx = idx + 1
 
 im2 = Image.new(im.mode, im.size)
